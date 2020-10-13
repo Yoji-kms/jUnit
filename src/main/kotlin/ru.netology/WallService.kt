@@ -15,8 +15,9 @@ object WallService {
         if (post != null) {
             comments += comment
             update(post.copy(comments = Comments(comments = comments)))
+            return true
         }
-        return true
+        return false
     }
 
     private fun findPostById(postId: Int): Post?{
