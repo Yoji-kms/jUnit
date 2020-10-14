@@ -50,26 +50,6 @@ class MainKtTest {
     }
 
     @Test
-    fun main_equalPosts() {
-        val post = Post()
-        val clonePost = post.copy()
-
-        assertEquals(post, clonePost)
-    }
-
-    @Test
-    fun main_hashPost() {
-        val hash = Post().hashCode()
-
-        assertNotEquals(0, hash)
-    }
-
-    @Test(expected = PostNotFoundException::class)
-    fun main_createCommentThrowsException() {
-        WallService.createComment(Comment(), Int.MIN_VALUE)
-    }
-
-    @Test
     fun main_createComment() {
         val wall = WallService
         val post = wall.add(Post())

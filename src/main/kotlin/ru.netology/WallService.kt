@@ -1,27 +1,27 @@
 package ru.netology
 
 object WallService {
-    private var posts = emptyArray<Post>()
-    private var comments = emptyArray<Comment>()
+    private val posts = mutableListOf<Post>()
+    private val comments = mutableListOf<Comment>()
 
     fun clear() {
-        posts = emptyArray()
-        comments = emptyArray()
+        posts.clear()
+        comments.clear()
     }
 
     fun createComment(comment: Comment, postId: Int): Boolean {
-        val post:Post? = findPostById(postId)
+        val post: Post = findPostById(postId)
 
-        if (post != null) {
-            comments = post.comments?.comments ?: emptyArray()
-            comments += comment
-            update(post.copy(comments = Comments(comments = comments)))
-            return true
-        }
-        return false
+        val postComments = (post.comments?.comments ?: mutableListOf()) as MutableList<Comment>
+        val newComment = comment.copy(id = comments.lastIndex + 1)
+
+        comments += newComment
+        postComments += newComment
+        update(post.copy(comments = Comments(comments = postComments)))
+        return true
     }
 
-    private fun findPostById(postId: Int): Post?{
+    private fun findPostById(postId: Int): Post{
         for(post:Post in posts){
             if (post.id == postId) return post
         }

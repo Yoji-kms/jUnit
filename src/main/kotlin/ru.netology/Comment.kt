@@ -10,6 +10,6 @@ data class Comment(
     val replyToUser: Int? = null,
     val replyToComment: Int? = null,
     val attachment: Attachment? = null,
-    val parentsStack: Array<Int> = emptyArray(),
+    val parentsStack: List<Int> = emptyList(),
     val thread: Thread = Thread()
 )
